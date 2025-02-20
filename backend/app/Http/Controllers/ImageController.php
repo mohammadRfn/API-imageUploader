@@ -13,9 +13,10 @@ class ImageController extends Controller
      */
     public function index()
     {
-        return Image::latest()
+        return Image::where('user_id', auth()->id()) 
+            ->latest()
             ->get()
-            ->map(function($image) {
+            ->map(function ($image) {
                 return [
                     'id' => $image->id,
                     'url' => url(Storage::url($image->path)),
@@ -36,6 +37,7 @@ class ImageController extends Controller
         ]);
         $path = $request->file('image')->store('images', 'public');
         Image::create([
+            'user_id' => auth()->id(),
             'path' => $path,
             'label' => $request->label
         ]);

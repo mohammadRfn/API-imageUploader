@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    protected $fillable = ['path', 'label'];
+    protected $fillable = ['user_id','path', 'label'];
+
 }
